@@ -30,6 +30,7 @@ import Flatten from "@flatten-js/core";
 import NestedError from "nested-error-stacks";
 import type { FlattenPrimitive } from "./Primitives";
 import { isPrimitive, isPoint, isVector, isSegment, isLine, isBox, isPolygon } from "./Primitives";
+// TODO: Not available on the client.
 import { inspect } from "util";
 
 

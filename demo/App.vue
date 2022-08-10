@@ -2,6 +2,9 @@
 </script>
 <template>
   <main>
-    Hello World.
+    <pan-zoom-demo />
   </main>
 </template>
+<script setup lang="ts">
+import PanZoomDemo from "./components/PanZoomDemo.vue";
+</script>

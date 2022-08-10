@@ -26,7 +26,6 @@
  * *****************************************************************************/
 
 import Flatten from "@flatten-js/core";
-import zip from "lodash-es/zip";
 import CartesianCoordinateSystem from "./CartesianCoordinateSystem";
 
 // The geometric primitives from the Flatten library that can have an

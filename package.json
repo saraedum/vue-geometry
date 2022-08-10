@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
+    "@thesoulfresh/pan-zoom": "^4.1.4",
     "@types/jsdom": "^16.2.14",
     "@types/lodash-es": "^4.17.6",
     "@types/nested-error-stacks": "^2.1.0",
