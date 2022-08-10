@@ -28,12 +28,12 @@
   </pan-zoom>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { readonly, ref } from "vue";
 import type Flatten from "@flatten-js/core";
 import PanZoom from "@/components/PanZoom.vue";
-import Viewport from "@/geometry/Viewport";
+import { default as ViewportGeometry } from "@/geometry/Viewport";
 
-const viewport = ref(new Viewport());
+const viewport = ref(new ViewportGeometry());
 
 function zoom(factor: number, center: Flatten.Point) {
   viewport.value.zoom(factor, center);

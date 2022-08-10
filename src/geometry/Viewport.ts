@@ -22,7 +22,7 @@
  * *****************************************************************************/
 
 import Flatten from "@flatten-js/core";
-import { inject, provide } from "vue";
+import { inject, provide, type DeepReadonly } from "vue";
 import CartesianCoordinateSystem from "./CartesianCoordinateSystem";
 
 const VIEWPORT = Symbol("VIEWPORT");
@@ -44,7 +44,7 @@ export default class Viewport {
   public readonly idealCoordinateSystem: CartesianCoordinateSystem;
   public readonly clientCoordinateSystem: CartesianCoordinateSystem;
 
-  public static use(viewport?: Viewport) {
+  public static use(viewport?: DeepReadonly<Viewport>) {
     if (viewport == null) {
       viewport = inject(VIEWPORT);
       if (viewport === undefined)
@@ -53,7 +53,7 @@ export default class Viewport {
       provide(VIEWPORT, viewport);
 
     return {
-      viewport: viewport,
+      viewport,
       idealCoordinateSystem: viewport.idealCoordinateSystem,
       clientCoordinateSystem: viewport.clientCoordinateSystem,
     };

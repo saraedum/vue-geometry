@@ -23,11 +23,12 @@
 </template>
 <script setup lang="ts">
 import { defineProps } from "vue";
+import type { DeepReadonly } from "vue";
 import EmbeddedRect from "./EmbeddedRect.vue";
 import Viewport from "@/geometry/Viewport";
 
 interface Props {
-  viewport: Viewport;
+  viewport: DeepReadonly<Viewport>;
 }
 const props = defineProps<Props>();
 Viewport.use(props.viewport);
