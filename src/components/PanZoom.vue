@@ -1,4 +1,9 @@
 <!--
+
+  A container that emits events when content is dragged around or zoomed.
+
+-->
+<!--
  |  This file is part of vue-geometry.
  |
  |        Copyright (c) 2021-2022 Julian Rüth
@@ -47,7 +52,7 @@ onMounted(() => {
   unpanzoom = panzoom(container.value, (e: any) => {
     // We either zoom or pan; mixing this is probably confusing.
     if (e.dz !== 0) {
-      emit("zoom", Math.exp(-e.dz/96), new Flatten.Point(e.x, e.y));
+      emit("zoom", Math.exp(-e.dz/256), new Flatten.Point(e.x, e.y));
       return;
     }
     

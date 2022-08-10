@@ -27,11 +27,10 @@
  * *****************************************************************************/
 
 import Flatten from "@flatten-js/core";
-import NestedError from "nested-error-stacks";
+import TraceError from "trace-error";
 import type { FlattenPrimitive } from "./Primitives";
 import { isPrimitive, isPoint, isVector, isSegment, isLine, isBox, isPolygon } from "./Primitives";
-// TODO: Not available on the client.
-import { inspect } from "util";
+import inspect from "object-inspect";
 
 
 // Private Symbol to store the coordinate system inside a proxy object for a
@@ -170,7 +169,7 @@ export default class CartesianCoordinateSystem {
 
   // Return a matrix that embeds this coordinate system into ``other``.
   // Return ``null`` if there is no such embedding.
-  private discover(other: CartesianCoordinateSystem): Flatten.Matrix | null {
+  public discover(other: CartesianCoordinateSystem): Flatten.Matrix | null {
     if (this.embeddings.has(other))
       return this.embeddings.get(other)!;
     throw Error("not implemented: discover()");
@@ -219,7 +218,7 @@ export default class CartesianCoordinateSystem {
 
                 return coordinateSystem.wrapReturnValue(target.bind(thisArg)(...args));
               } catch(e) {
-                throw new NestedError(`failed to invoke ${target} with arguments ${inspect(args)}`, e as any);
+                throw new TraceError(`failed to invoke ${target} with arguments ${inspect(args)}`, e as any);
               }
             },
           });

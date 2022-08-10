@@ -1,4 +1,10 @@
 <!--
+
+  A container that provides coordinate system transformations that reflect when
+  content is dragged around or zoomed.
+
+-->
+<!--
  |  This file is part of vue-geometry.
  |
  |        Copyright (c) 2021-2022 Julian Rüth
@@ -17,45 +23,23 @@
  |  along with vue-geometry. If not, see <https://www.gnu.org/licenses/>.
  -->
 <template>
-  <pan-zoom @zoom="zoom" @drag="drag" @start="start" @end="end">
-    <div class="container">
-      {{ event }}
-    </div>
+  <pan-zoom @zoom="zoom" @drag="drag">
+    <slot :viewport="viewport"/>
   </pan-zoom>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import PanZoom from "@/components/PanZoom.vue";
 import type Flatten from "@flatten-js/core";
+import PanZoom from "@/components/PanZoom.vue";
+import Viewport from "@/geometry/Viewport";
 
-const event = ref("click me!");
+const viewport = ref(new Viewport());
 
-function zoom(zoom: number, center: Flatten.Point) {
-  event.value = `zoom by ${zoom} with center ${JSON.stringify(center.toJSON())}`;
+function zoom(factor: number, center: Flatten.Point) {
+  viewport.value.zoom(factor, center);
 }
 
 function drag(delta: Flatten.Vector) {
-  event.value = `drag by ${JSON.stringify(delta.toJSON())}`
-}
-
-function start() {
-  event.value = "drag me!";
-}
-
-function end() {
-  event.value = "click me!";
+  viewport.value.drag(delta);
 }
 </script>
-<style scoped>
-.container {
-  border: 1px solid lightgrey;
-  width: 512px;
-  height: 384px;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  text-align: center;
-  font-family: monospace;
-}
-</style>
